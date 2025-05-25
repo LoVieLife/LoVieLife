@@ -1,14 +1,23 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern sans-serif stack */
     line-height: 1.6;
     margin: 0; /* Changed from 20px to 0, as .container will handle main content spacing */
-    background-color: #f4f4f4;
-    color: #333;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+    color: #4A4A4A;
     padding: 0; /* Added to ensure no default padding interferes with .container */
 }
 
 h1, h2 {
-    color: #0056b3; /* A shade of blue */
+    color: #2c3e50; /* Sophisticated dark blue */
+    /* font-family will be inherited from body */
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 15px;
 }
 
 .container {
@@ -24,6 +33,65 @@ footer {
     text-align: center;
     padding: 20px 0;
     margin-top: 30px;
-    color: #666;
+    color: #555; /* Harmonized footer text color */
     border-top: 1px solid #ddd;
+}
+
+a {
+    color: #007bff; /* Standard blue for links */
+    text-decoration: none;
+    transition: color 0.3s ease; /* Added transition for color change */
+}
+
+a:hover {
+    color: #0056b3; /* Darker blue for hover */
+}
+
+.content-card p {
+    margin-bottom: 10px;
+}
+
+.content-card p:last-child {
+    margin-bottom: 0;
+}
+
+.content-card ul {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding-left: 20px; /* Cleaner indent */
+    list-style-type: circle; /* Lighter list style */
+}
+
+.content-card {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0; /* Start transparent before animation */
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.content-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#glutathione.content-card {
+    animation-delay: 0.1s; /* First card */
+}
+#ergothioneine.content-card {
+    animation-delay: 0.3s; /* Second card, slightly later */
 }
