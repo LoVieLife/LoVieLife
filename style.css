@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0; /* Changed from 20px to 0, as .container will handle main content spacing */
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 0; /* Added to ensure no default padding interferes with .container */
+}
+
+h1, h2 {
+    color: #0056b3; /* A shade of blue */
+}
+
+.container {
+    max-width: 960px;
+    margin: 20px auto; /* Added top/bottom margin here */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    color: #666;
+    border-top: 1px solid #ddd;
+}
