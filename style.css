@@ -1,97 +1,315 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrollbar if gradient animation causes slight overflow */
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern sans-serif stack */
-    line-height: 1.6;
-    margin: 0; /* Changed from 20px to 0, as .container will handle main content spacing */
-    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-    color: #4A4A4A;
-    padding: 0; /* Added to ensure no default padding interferes with .container */
+    font-family: sans-serif; /* Placeholder, will be refined later */
+    color: #333; /* Placeholder, will be refined later */
+    background: linear-gradient(-45deg, #2c3e50, #4a69bd, #6a89cc, #82ccdd, #a8e6cf);
+    background-size: 600% 600%; /* Larger size for smoother, slower animation */
+    animation: gradientFlow 25s ease infinite;
+    min-height: 100vh; /* Ensure it covers viewport even with minimal content */
 }
 
-h1, h2 {
-    color: #2c3e50; /* Sophisticated dark blue */
-    /* font-family will be inherited from body */
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-h1 {
-    margin-bottom: 20px;
-}
-
-h2 {
-    margin-bottom: 15px;
-}
-
-.container {
-    max-width: 960px;
-    margin: 20px auto; /* Added top/bottom margin here */
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-footer {
+.molecule-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    margin: 30px auto; /* Center and provide spacing */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 20px 0;
-    margin-top: 30px;
-    color: #555; /* Harmonized footer text color */
-    border-top: 1px solid #ddd;
+    position: relative; /* For pseudo-element positioning if needed */
 }
 
-a {
-    color: #007bff; /* Standard blue for links */
-    text-decoration: none;
-    transition: color 0.3s ease; /* Added transition for color change */
+.molecule-placeholder:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3); /* Slightly more opaque on hover */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3); /* Glow effect */
 }
 
-a:hover {
-    color: #0056b3; /* Darker blue for hover */
+.molecule-placeholder::before {
+    content: "探索"; /* Explore in Traditional Chinese */
+    font-size: 1.5em; /* Made slightly larger for better visibility */
+    color: rgba(255, 255, 255, 0.9); /* Brighter text */
+    font-weight: bold;
+    font-family: 'Noto Sans TC', sans-serif; /* Example of a TC font, ensure it's available or use a generic one */
 }
 
-.content-card p {
-    margin-bottom: 10px;
+/* Page Overlay */
+.page-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Darker semi-transparent background */
+    z-index: 999; /* Below the panel, but above everything else */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    display: none; /* Initially hidden */
 }
 
-.content-card p:last-child {
-    margin-bottom: 0;
+.page-overlay.active {
+    display: block;
+    opacity: 1;
 }
 
-.content-card ul {
-    margin-top: 10px;
+/* Info Panel */
+.info-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* Initial state before active: starts slightly above center and scaled down */
+    transform: translate(-50%, calc(-50% - 30px)) scale(0.9); 
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh; /* Max height to prevent overflow on small screens */
+    overflow-y: auto; /* Scroll for content that exceeds max-height */
+    background: rgba(255, 255, 255, 0.98); /* Slightly more opaque white */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    z-index: 1000; /* Above the overlay */
+    opacity: 0;
+    /* Enhanced transition with cubic-bezier for a slight overshoot/dynamic feel */
+    transition: opacity 0.3s ease-out, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: none; /* Initially hidden */
+    color: #333; /* Ensure text color is dark for readability */
+}
+
+.info-panel.active {
+    display: block;
+    opacity: 1;
+    /* Final state: centered and full scale */
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Info Panel Content Styling */
+.info-panel h2 {
+    color: #2c3e50; /* Same as main page H1/H2 */
+    margin-top: 0;
     margin-bottom: 15px;
-    padding-left: 20px; /* Cleaner indent */
-    list-style-type: circle; /* Lighter list style */
+    font-family: 'Noto Sans TC', sans-serif; /* Consistent font */
 }
 
-.content-card {
-    background-color: #ffffff;
+.info-panel h3 {
+    color: #4a69bd; /* Accent color for subheadings */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.info-panel p, .info-panel ul {
+    font-size: 0.95em;
+    line-height: 1.7; /* Slightly more line height for readability in panel */
+    color: #4A4A4A; /* Main text color, consistent with body if possible */
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.info-panel ul {
+    padding-left: 20px;
+    list-style-type: circle; /* Or disc */
+}
+
+.info-panel ul li {
+    margin-bottom: 8px;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #e74c3c; /* Reddish color for close */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    line-height: 28px; /* Center the '×' */
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-weight: bold;
+}
+
+.close-btn:hover {
+    background: #c0392b; /* Darker red on hover */
+}
+
+/* Interactive Graphic Section */
+#interactive-graphic-section {
     padding: 20px;
-    margin-bottom: 20px;
+    margin-top: 30px;
+    text-align: center; /* Center the heading */
+}
+
+#interactive-graphic-section h2 {
+    color: #fff; /* White text for better contrast on dark gradient */
+    margin-bottom: 25px;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.graphic-container {
+    position: relative; /* For tooltip positioning */
+    display: inline-block; /* To wrap around the cell-graphic */
+    margin: 0 auto; /* Center the container if its parent is text-align: center */
+}
+
+.cell-graphic-placeholder {
+    width: 500px;
+    height: 400px;
+    background: linear-gradient(135deg, #6a89cc 0%, #82ccdd 50%, #a8e6cf 100%); /* A lighter, cell-like gradient */
+    position: relative;
+    margin: 20px auto;
+    border-radius: 20px; /* More pronounced rounding */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.hotspot {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #ff6347; /* Tomato color for hotspot */
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+}
+
+.hotspot:hover {
+    transform: scale(1.15);
+}
+
+.hotspot-icon {
+    font-size: 1em;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.hotspot-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 99, 71, 0.5); /* Semi-transparent tomato */
+    border-radius: 50%;
+    animation: pulse-animation 2s infinite ease-out;
+    z-index: -1; /* Behind the icon */
+}
+
+@keyframes pulse-animation {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.8); opacity: 0; } /* Expand more */
+    100% { transform: scale(1); opacity: 0; }
+}
+
+.hotspot-tooltip {
+    position: absolute;
+    top: 50%; /* Default position, JS might override */
+    left: 105%; /* Default position, to the right of the graphic */
+    transform: translateY(-50%);
+    width: 220px; /* Slightly wider */
+    background-color: rgba(255, 255, 255, 0.95); /* High opacity white */
+    padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0; /* Start transparent before animation */
-    animation: fadeInUp 0.5s ease-out forwards;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 100; /* Above hotspots */
+    color: #333;
+    font-family: 'Noto Sans TC', sans-serif;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* display: none; is handled by inline style initially */
 }
 
-.content-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+.hotspot-tooltip.active { /* For JS to toggle visibility with animation */
+    display: block;
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+.hotspot-tooltip p {
+    margin: 0 0 10px 0;
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+#close-tooltip-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #aaa;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 0.9em;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#close-tooltip-btn:hover {
+    background: #888;
+}
+
+/* Keyframes for molecule placeholder click animation */
+@keyframes placeholderClick {
+    0% { 
+        transform: scale(1.1); /* Corresponds to existing hover scale */
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3); 
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    50% { 
+        transform: scale(1.25); 
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.7), 0 0 50px rgba(255, 255, 255, 0.5); 
+    }
+    100% { 
+        transform: scale(1.1); /* Return to hover scale or similar */
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3); 
     }
 }
 
-#glutathione.content-card {
-    animation-delay: 0.1s; /* First card */
+.molecule-placeholder.clicked-animation {
+    animation: placeholderClick 0.4s ease-out;
 }
-#ergothioneine.content-card {
-    animation-delay: 0.3s; /* Second card, slightly later */
+
+.trail-dot {
+    position: absolute; /* Positioned relative to the viewport */
+    width: 10px;        /* Size of the dot */
+    height: 10px;
+    background-color: rgba(173, 216, 230, 0.5); /* Light blue, semi-transparent */
+    border-radius: 50%;
+    pointer-events: none; /* So they don't interfere with mouse clicks on other elements */
+    z-index: 9999;      /* Ensure they are on top */
+    opacity: 1;
+    transition: opacity 0.5s ease-out, transform 0.3s ease-out; /* For fading and smooth movement */
+    left: 0; /* Initial position, JS will override with transform */
+    top: 0;  /* Initial position, JS will override with transform */
+    /* transform: translate(-50%, -50%); /* To center the dot on the cursor, applied by JS */
 }

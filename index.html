@@ -1,47 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glutathione and Ergothioneine: Key Antioxidants</title>
+    <title>谷胱甘肽與麥角硫因的奇妙世界</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
     <header>
-        <h1>Understanding Glutathione and Ergothioneine</h1>
+        <h1>谷胱甘肽與麥角硫因的奇妙世界</h1>
     </header>
-
     <main>
-        <section id="glutathione" class="content-card">
-            <h2>The Power of Glutathione</h2>
-            <p>Glutathione (GSH) is a potent antioxidant naturally produced in our cells. It plays a crucial role in protecting cells from damage caused by free radicals and toxins. Composed of three amino acids – cysteine, glutamic acid, and glycine – GSH is involved in various metabolic processes, including DNA synthesis and repair, protein synthesis, prostaglandin synthesis, amino acid transport, and enzyme activation. Its levels in the body can decrease due to aging, stress, and toxin exposure.</p>
-            <p>Key functions of Glutathione include:</p>
-            <ul>
-                <li>Neutralizing free radicals</li>
-                <li>Detoxification of harmful substances</li>
-                <li>Supporting immune system function</li>
-                <li>Regenerating other antioxidants like Vitamin C and E</li>
-                <li>Maintaining cellular health</li>
-            </ul>
+        <section id="glutathione-section">
+            <h2>谷胱甘肽的威力</h2>
+            <div class="content-placeholder" id="glutathione-content">
+                <p>谷胱甘肽（GSH）是我們細胞中自然產生的一種強效抗氧化劑。它在保護細胞免受自由基和毒素損害方面扮演著關鍵角色。谷胱甘肽由三種氨基酸組成——半胱氨酸、谷氨酸和甘氨酸——參與多種代謝過程，包括DNA合成與修復、蛋白質合成、前列腺素合成、氨基酸轉運以及酶的活化。其在體內的水平可能會因衰老、壓力及毒素暴露而下降。</p>
+                <h3>主要功能：</h3>
+                <ul>
+                    <li>中和自由基</li>
+                    <li>解毒有害物質</li>
+                    <li>支持免疫系統功能</li>
+                    <li>再生其他抗氧化劑（如維生素C和E）</li>
+                    <li>維持細胞健康</li>
+                </ul>
+            </div>
+            <div class="molecule-placeholder" id="glutathione-interactive"></div>
+            <div id="glutathione-info-panel" class="info-panel" style="display: none;">
+                <button class="close-btn" data-target="glutathione-info-panel">&times;</button>
+                <!-- Content will be moved here by JS -->
+            </div>
+        </section>
+        <section id="ergothioneine-section">
+            <h2>探索麥角硫因</h2>
+            <div class="content-placeholder" id="ergothioneine-content">
+                <p>麥角硫因（ET）是一種天然存在的氨基酸和抗氧化劑，人類主要通過飲食獲取，其中蘑菇是特別豐富的來源。它通過特定的轉運蛋白ETT（SLC22A4）被主動轉運至細胞內，這表明其具有獨特的生理作用。麥角硫因會積聚在易受氧化壓力影響的細胞和組織中，例如紅血球、骨髓、肝臟和眼睛。</p>
+                <h3>潛在益處：</h3>
+                <ul>
+                    <li>保護細胞免受氧化損傷</li>
+                    <li>作為抵抗多種毒素的「細胞保鑣」</li>
+                    <li>潛在的抗炎作用</li>
+                    <li>可能在預防神經退化性疾病中扮演角色</li>
+                    <li>有助於提升整體細胞的恢復能力</li>
+                </ul>
+            </div>
+            <div class="molecule-placeholder" id="ergothioneine-interactive"></div>
+            <div id="ergothioneine-info-panel" class="info-panel" style="display: none;">
+                <button class="close-btn" data-target="ergothioneine-info-panel">&times;</button>
+                <!-- Content will be moved here by JS -->
+            </div>
         </section>
 
-        <section id="ergothioneine" class="content-card">
-            <h2>Exploring Ergothioneine</h2>
-            <p>Ergothioneine (ET) is a naturally occurring amino acid and antioxidant that humans primarily obtain through their diet, with mushrooms being a particularly rich source. It is actively transported into cells by a specific transporter, ETT (SLC22A4), suggesting a unique physiological role. Ergothioneine accumulates in cells and tissues prone to oxidative stress, such as red blood cells, bone marrow, liver, and the eyes.</p>
-            <p>Potential benefits and roles of Ergothioneine include:</p>
-            <ul>
-                <li>Protecting cells from oxidative damage</li>
-                <li>Acting as a 'cellular bodyguard' against various toxins</li>
-                <li>Potentially reducing inflammation</li>
-                <li>Possible roles in protecting against neurodegenerative diseases</li>
-                <li>Contributing to overall cellular resilience</li>
-            </ul>
+        <section id="interactive-graphic-section">
+            <h2>探索細胞的奧秘</h2>
+            <div class="graphic-container">
+                <div id="cell-graphic" class="cell-graphic-placeholder">
+                    <!-- Hotspots will be absolutely positioned within this container -->
+                    <div class="hotspot" id="hotspot-1" style="top: 20%; left: 30%;">
+                        <span class="hotspot-pulse"></span>
+                        <span class="hotspot-icon">?</span>
+                    </div>
+                    <div class="hotspot" id="hotspot-2" style="top: 50%; left: 60%;">
+                        <span class="hotspot-pulse"></span>
+                        <span class="hotspot-icon">!</span>
+                    </div>
+                    <div class="hotspot" id="hotspot-3" style="top: 75%; left: 40%;">
+                        <span class="hotspot-pulse"></span>
+                        <span class="hotspot-icon">+</span>
+                    </div>
+                </div>
+                <!-- Tooltip/Info-box for displaying hotspot information -->
+                <div id="hotspot-tooltip" class="hotspot-tooltip" style="display: none;">
+                    <p id="hotspot-text"></p>
+                    <button id="close-tooltip-btn">&times;</button>
+                </div>
+            </div>
         </section>
     </main>
-</div>
     <footer>
-        <p>© 2023 GlutathioneScience.org</p>
+        <p>© 2023 探索生命奧秘之旅</p>
     </footer>
+    <div class="page-overlay" style="display: none;"></div>
+    <script src="script.js"></script>
 </body>
 </html>
